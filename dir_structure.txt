@@ -1,0 +1,52 @@
+my_ai_app/
+├── backend/                        # Python環境はここに集約
+│   ├── debug_inference.ipynb            # 推論・ステアリングの実験用 🐋🐋ここでデバッグ（ユーザが直接実行するのはこのディレクトリのファイルのみ）🐋🐋
+│   ├── training_DeBERTa.ipynb           # 感情分類器を学習させるプログラム（一回だけ実行でOK） 
+│   │              
+│   ├── app/
+│   │   ├── core/                       # AIの中核ロジック
+│   │   │   ├── llm_engine.py               # LLMのロード・推論クラス
+│   │   │   └── steerer.py                  # 感情ベクトル注入ロジック
+│   │   ├── rag/                        #  RAG関連
+│   │   │   └── build_index.py              # 検索用データベースを作成するプログラム（data_text.pk, data_index.faiss の2ファイルを出力）
+│   │   └── api/                        # api関連
+│   │       └── voicevox_client.py         # VOICEVOX APIを叩いてWAVを生成・保存（cpu版のエンジンを使用）
+│   ├── data/                       # データ置き場
+│   │   ├── raw/
+│   │   │   ├── wrime/                  # WRIMEデータセット(tsv等, 感情分類器（DeBERTa）学習用)
+│   │   │   ├── steering/               # 感情ステアリングベクトル作成のためのデータセット
+│   │   │   │   └── Plutchik_for_emo_steering_dataset_v2.xlsx   # 8感情100件、中立を加えた合計900件
+│   │   │   └── rag_docs/               # RAGのためのtxtデータ、一行単位で処理
+│   │   │   │   └── xxx.txt                # ragのための情報源
+│   │   ├── processed/                  # 処理済みデータ
+│   │   │   └── steering_vectors/           # 生成した感情ベクトル(.pt)
+│   │   │   └── rag_store/                  # VectorDB保存先
+│   │   │       ├── data_texts.pkl             # 生の文章（faissから添字を取得後、LLMに渡す文章リストに対応させるため）
+│   │   │       └── data_index.faiss           # faissインデックス（ベクトルDB）
+│   ├── models/                         # モデルファイル
+│   │   ├─ local_llm_files/                 # ※毎回huggingfaceからロードするならここは空
+│   │   └─ deBerta_for_emo/                 # 内部感情を決定するため、入力文章から感情を決定する分類器（wrimeの内部感情ラベルで学習）
+│   └── requirements.txt                # 依存ライブラリ
+│
+frontend/
+├── index.html                 # メインのUI画面（チャット画面＋Live2Dキャンバス）
+├── assets/
+│   └── audio/             # バックエンドが生成したwavファイルを一時保存するディレクトリ
+├── static/                    # Flaskが自動的に読み込む静的ファイル群
+│   ├── css/
+│   │   └── style.css          # デザイン用ファイル（先ほどの<style>を切り出したもの）
+│   ├── js/
+│   │   └── live2d_setup.js    # Live2Dモデルの読み込みと感情モーション再生を管理する用
+│   └── assets/
+│        ├── audio/             # バックエンドが生成したwavファイルを一時保存するディレクトリ
+│        └── live2d_model/      # ★Live2Dモデルの書き出しデータ一式が入る場所
+│           ├── koka_fumi.model3.json   # モデル定義のメインファイル（これをJSで読み込む）
+│           ├── koka_fumi.moc3          # メッシュ・パラメータのコアデータ
+│           ├── koka_fumi.cdi3.json
+│           └── koka_fumi.2048/
+│
+storage/                            # (将来) SQLiteなど永続化データ
+│    └── ...
+│
+tools
+    └── linux-cpu-x64/          # voicevoxエンジン（cpu版）

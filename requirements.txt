@@ -1,0 +1,20 @@
+# LLM & 量子化
+torch
+transformers
+
+bitsandbytes>=0.46.1
+accelerate
+
+# RAG & データ処理
+sentence-transformers
+faiss-cpu
+openpyxl
+pandas
+
+# サーバー & 通信関連
+flask
+flask-cors
+requests
+
+# その他
+tqdm

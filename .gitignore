@@ -1,0 +1,61 @@
+# === AI Models & Weights (巨大ファイル) ===
+/backend/models/
+!/backend/models/.gitkeep
+*.pt
+*.pth
+*.safetensors
+
+# === Datasets & RAG (著作権・再生成可能なデータ) ===
+
+/backend/data/processed/rag_store/*
+!/backend/data/processed/rag_store/.gitkeep
+
+/backend/data/processed/steering_vectors/*
+!/backend/data/processed/steering_vectors/.gitkeep
+
+# 🐬RAGに用いる文書データについて、gitHubにupするのがダメな場合の記述。可能な場合はコメントアウトでOK
+/backend/data/raw/rag_docs/*
+!/backend/data/raw/rag_docs/.gitkeep
+
+# 自動ダウンロードされるため、ディレクトリごとGit管理から除外
+/backend/data/raw/wrime/
+
+
+# === Tools & Binaries (バイナリ・インストーラー) ===
+/tools/*
+!/tools/.gitkeep
+/backend/*.deb*
+
+# === Frontend Assets (自動生成ファイルや著作権関連) ===
+/frontend/assets/audio/*
+!/frontend/assets/audio/.gitkeep
+
+/frontend/static/assets/favicon/*
+!/frontend/static/assets/favicon/.gitkeep
+
+# 静止画用の臨時キャラクタ画像について
+/frontend/static/assets/tmp_character_data/*
+!/frontend/static/assets/tmp_character_data/.gitkeep
+
+# 🐬サンプル用の背景画像のみ許可、gitHubにupしても良い場合はコメントアウト
+/frontend/static/assets/bg_imgs/*
+!/frontend/static/assets/bg_imgs/.gitkeep
+!/frontend/static/assets/bg_imgs/sample_bg.png
+
+/storage/*
+!/storage/.gitkeep
+
+
+# === Python & Jupyter Notebook ===
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# === Environments & Secrets ===
+.env
+venv/
+.venv/
+
+# === OS specific ===
+.DS_Store
+Thumbs.db
