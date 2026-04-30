@@ -34,7 +34,7 @@
 !/frontend/static/assets/favicon/.gitkeep
 
 # 静止画用の臨時キャラクタ画像について
-/frontend/static/assets/tmp_character_data/*
+/frontend/static/assets/tmp_character_data/* 
 !/frontend/static/assets/tmp_character_data/.gitkeep
 
 # 🐬サンプル用の背景画像のみ許可、gitHubにupしても良い場合はコメントアウト
